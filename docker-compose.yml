@@ -1,0 +1,35 @@
+version: '3.6'
+
+services:
+  eve:
+    container_name: appto_workman_eve
+    build: .
+    restart: unless-stopped
+    environment:
+      - MONGO_URI=mongodb://mongo/db
+    ports:
+      - 5000:5000
+    networks:
+      - appto
+    volumes:
+      - ./settings.py:/app/settings.py
+      - ./server.py:/app/server.py
+      - ./log:/app/log
+
+
+
+  mongo:
+    container_name: appto_workman_mongo
+    image: mongo:3.6
+    restart: unless-stopped
+    ports:
+      - 27018:27017
+    networks:
+      - appto
+    volumes:
+      - ./mongo:/data/db
+
+networks:
+  appto:
+    #external: true
+    name: appto_net

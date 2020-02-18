@@ -1,0 +1,13 @@
+language: bash
+
+sudo: required
+
+services:
+  - docker
+
+install:
+  - docker build -t eve .
+  - docker run -d -p 127.0.0.1:5000:5000 --name eve eve
+
+script:
+  - docker ps | grep -q eve

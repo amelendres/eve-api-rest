@@ -1,0 +1,4 @@
+mongo
+
+*.pyc
+.vscode
